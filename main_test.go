@@ -8,15 +8,33 @@ func BenchmarkIsAuthorization(b *testing.B) {
 	}
 }
 
+func BenchmarkIsAuthorizationCompiled(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		IsAuthorizationCompiled("1::Authorize(12345, ABCD)")
+	}
+}
+
+func BenchmarkIsAuthorizationString(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		IsAuthorizationString("1::Authorize(12345, ABCD)")
+	}
+}
+
+func BenchmarkIsAuthorizationStringConstant(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		IsAuthorizationStringConstant("1::Authorize(12345, ABCD)")
+	}
+}
+
 func BenchmarkIsLogin(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		IsLogin("1::Login(password)")
 	}
 }
 
-func BenchmarkIsAttributes(b *testing.B) {
+func BenchmarkIsLoginString(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		IsAttributes("1::Attributes(fan)")
+		IsLoginString("1::Login(password)")
 	}
 }
 

@@ -6,14 +6,16 @@ import (
 )
 
 const (
-	attributePrefix    = `1::Attributes`
 	statusIDUnitPrefix = `1.7.4.2.`
 	evDataPrefix       = `evData`
+	authorize          = `1::Authorize`
+	loginPrefix        = `1::Login`
 )
 
 var (
-	loginRegex = regexp.MustCompile(`^1::Login`)
-	unitRegex  = regexp.MustCompile(`^1.7.4.2.\d+::evData`)
+	authorizationCompiled = regexp.MustCompile(`^1::Authorize`)
+	loginRegex            = regexp.MustCompile(`^1::Login`)
+	unitRegex             = regexp.MustCompile(`^1.7.4.2.\d+::evData`)
 )
 
 func IsAuthorization(m string) bool {
@@ -21,12 +23,24 @@ func IsAuthorization(m string) bool {
 	return r.Match([]byte(m))
 }
 
+func IsAuthorizationCompiled(m string) bool {
+	return authorizationCompiled.Match([]byte(m))
+}
+
+func IsAuthorizationString(m string) bool {
+	return strings.Contains(m, `1::Authorize`)
+}
+
+func IsAuthorizationStringConstant(m string) bool {
+	return strings.Contains(m, authorize)
+}
+
 func IsLogin(m string) bool {
 	return loginRegex.Match([]byte(m))
 }
 
-func IsAttributes(m string) bool {
-	return strings.HasPrefix(m, attributePrefix)
+func IsLoginString(m string) bool {
+	return strings.HasPrefix(m, loginPrefix)
 }
 
 func IsUnitMessage(m string) bool {
