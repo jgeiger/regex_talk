@@ -9,38 +9,36 @@ const (
 	statusIDUnitPrefix = `1.7.4.2.`
 	evDataPrefix       = `evData`
 	authorize          = `1::Authorize`
-	loginPrefix        = `1::Login`
 )
 
 var (
 	authorizationCompiled = regexp.MustCompile(`^1::Authorize`)
-	loginRegex            = regexp.MustCompile(`^1::Login`)
 	unitRegex             = regexp.MustCompile(`^1.7.4.2.\d+::evData`)
 )
 
-func IsAuthorization(m string) bool {
+func IsAuthorizationRegexp(m string) bool {
 	r := regexp.MustCompile(`1::Authorize`)
 	return r.Match([]byte(m))
 }
 
-func IsAuthorizationCompiled(m string) bool {
+func IsAuthorizationRegexpCompiled(m string) bool {
 	return authorizationCompiled.Match([]byte(m))
 }
 
-func IsAuthorizationString(m string) bool {
+func IsAuthorizationRegexpCompiledMatchString(m string) bool {
+	return authorizationCompiled.MatchString(m)
+}
+
+func IsAuthorizationStringsContains(m string) bool {
 	return strings.Contains(m, `1::Authorize`)
 }
 
-func IsAuthorizationStringConstant(m string) bool {
+func IsAuthorizationStringsContainsConstant(m string) bool {
 	return strings.Contains(m, authorize)
 }
 
-func IsLogin(m string) bool {
-	return loginRegex.Match([]byte(m))
-}
-
-func IsLoginString(m string) bool {
-	return strings.HasPrefix(m, loginPrefix)
+func IsAuthorizationStringsPrefix(m string) bool {
+	return strings.HasPrefix(m, `1::Authorize`)
 }
 
 func IsUnitMessage(m string) bool {

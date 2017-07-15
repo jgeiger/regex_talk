@@ -2,39 +2,39 @@ package main
 
 import "testing"
 
-func BenchmarkIsAuthorization(b *testing.B) {
+func BenchmarkIsAuthorizationRegexp(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		IsAuthorization("1::Authorize(12345, ABCD)")
+		IsAuthorizationRegexp("1::Authorize(12345, ABCD)")
 	}
 }
 
-func BenchmarkIsAuthorizationCompiled(b *testing.B) {
+func BenchmarkIsAuthorizationRegexpCompiled(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		IsAuthorizationCompiled("1::Authorize(12345, ABCD)")
+		IsAuthorizationRegexpCompiled("1::Authorize(12345, ABCD)")
 	}
 }
 
-func BenchmarkIsAuthorizationString(b *testing.B) {
+func BenchmarkIsAuthorizationRegexpCompiledMatchString(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		IsAuthorizationString("1::Authorize(12345, ABCD)")
+		IsAuthorizationRegexpCompiledMatchString("1::Authorize(12345, ABCD)")
 	}
 }
 
-func BenchmarkIsAuthorizationStringConstant(b *testing.B) {
+func BenchmarkIsAuthorizationStringsContains(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		IsAuthorizationStringConstant("1::Authorize(12345, ABCD)")
+		IsAuthorizationStringsContains("1::Authorize(12345, ABCD)")
 	}
 }
 
-func BenchmarkIsLogin(b *testing.B) {
+func BenchmarkIsAuthorizationStringsContainsConstant(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		IsLogin("1::Login(password)")
+		IsAuthorizationStringsContainsConstant("1::Authorize(12345, ABCD)")
 	}
 }
 
-func BenchmarkIsLoginString(b *testing.B) {
+func BenchmarkIsAuthorizationStringsPrefix(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		IsLoginString("1::Login(password)")
+		IsAuthorizationStringsPrefix("1::Authorize(12345, ABCD)")
 	}
 }
 
