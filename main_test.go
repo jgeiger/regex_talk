@@ -20,9 +20,21 @@ func BenchmarkIsAuthorizationRegexpCompiledMatchString(b *testing.B) {
 	}
 }
 
+func BenchmarkIsAuthorizationRegexpCompiledMatchStringFailing(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		IsAuthorizationRegexpCompiledMatchString("cheese")
+	}
+}
+
 func BenchmarkIsAuthorizationStringsContains(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		IsAuthorizationStringsContains("1::Authorize(12345, ABCD)")
+	}
+}
+
+func BenchmarkIsAuthorizationStringsContainsFailing(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		IsAuthorizationStringsContains("cheese")
 	}
 }
 
@@ -35,6 +47,12 @@ func BenchmarkIsAuthorizationStringsContainsConstant(b *testing.B) {
 func BenchmarkIsAuthorizationStringsPrefix(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		IsAuthorizationStringsPrefix("1::Authorize(12345, ABCD)")
+	}
+}
+
+func BenchmarkIsAuthorizationStringsPrefixFailing(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		IsAuthorizationStringsPrefix("cheese")
 	}
 }
 
